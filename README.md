@@ -15,8 +15,6 @@ Python
 
 ## Authors
 
-Luan Pena
-
 Danilo Pena
 
 ## License
