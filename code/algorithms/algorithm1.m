@@ -9,9 +9,9 @@ if (~strcmp(name(end-3:end),'.jpg'))
     name = [name, '.jpg'];
 end
 
-for numero=1:qtd
+for ii=1:qtd
     
-if numero==1
+if ii==1
 I = imread(name);
 [M N D] = size(I);
 hsv_I = rgb2hsv(I);
@@ -35,15 +35,15 @@ i_std = std(i_I(:));
 v_mean_vetor = [v_mean];
 v_std_vetor = [v_std];
 else
-h_mean = mean(h_I(criterion_vetor(:,:,numero-1)==0));
-s_mean = mean(s_I(criterion_vetor(:,:,numero-1)==0));
-v_mean = mean(v_I(criterion_vetor(:,:,numero-1)==0));
-i_mean = mean(i_I(criterion_vetor(:,:,numero-1)==0));
+h_mean = mean(h_I(criterion_vetor(:,:,ii-1)==0));
+s_mean = mean(s_I(criterion_vetor(:,:,ii-1)==0));
+v_mean = mean(v_I(criterion_vetor(:,:,ii-1)==0));
+i_mean = mean(i_I(criterion_vetor(:,:,ii-1)==0));
 
-h_std = std(h_I(criterion_vetor(:,:,numero-1)==0));
-s_std = std(s_I(criterion_vetor(:,:,numero-1)==0));
-v_std = std(v_I(criterion_vetor(:,:,numero-1)==0));
-i_std = std(i_I(criterion_vetor(:,:,numero-1)==0));
+h_std = std(h_I(criterion_vetor(:,:,ii-1)==0));
+s_std = std(s_I(criterion_vetor(:,:,ii-1)==0));
+v_std = std(v_I(criterion_vetor(:,:,ii-1)==0));
+i_std = std(i_I(criterion_vetor(:,:,ii-1)==0));
 
 v_mean_vetor = [v_mean_vetor v_mean];
 v_std_vetor = [v_std_vetor v_std];
@@ -56,23 +56,23 @@ const2 = (s_mean - s_std);
 %    const = 0.95;
 %end
 
-criterio1 = (v_I > const);
+criterion1 = (v_I > const);
 %if numero==1
-%criterio1 = (v_I > 0.85*max(v_I(:)));
+%criterion1 = (v_I > 0.85*max(v_I(:)));
 %else
-%criterio1 = (v_I > 0.85*max(v_I(criterio_vetor(:,:,numero-1)==0)));
+%criterion1 = (v_I > 0.85*max(v_I(criterion_vetor(:,:,numero-1)==0)));
 %end
 
-criterio2 = (s_I < const2);
-%criterio2 = (s_I < 0.25*max(max(s_I)));
+criterion2 = (s_I < const2);
+%criterion2 = (s_I < 0.25*max(max(s_I)));
 
-if numero==1
+if ii==1
     clear criterio_vetor;
     criterion_vetor(M,N,qtd) = 0;
-    criterion = criterio1 .* criterio2;
+    criterion = criterion1 .* criterion2;
 else
-    %criterio = criterio1 .* criterio_anterior;
-    criterion = criterio1;
+    %criterion = criterion1 .* criterion_prev;
+    criterion = criterion1;
 end
 
 result_rgb = I;
@@ -88,12 +88,12 @@ for i=1:M
 end
 
 %imshow(result_rgb)
-if numero==1
-    name = [strrep(name,name(end-3:end),''), num2str(numero), '.jpg'];
+if ii==1
+    name = [strrep(name,name(end-3:end),''), num2str(ii), '.jpg'];
     criterion_vetor(:,:,1) = criterion;
 else
-    name = [strrep(name,name(end-4:end),''), num2str(numero), '.jpg'];
-    criterion_vetor(:,:,numero) = criterion;
+    name = [strrep(name,name(end-4:end),''), num2str(ii), '.jpg'];
+    criterion_vetor(:,:,ii) = criterion;
 end
 imwrite(result_rgb,name);
 
