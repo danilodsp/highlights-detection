@@ -1,26 +1,24 @@
-# Highlights-detection
-(...)
+# Highlights Detection
 
 ## Getting Started
-(...)
 
 ### Prerequisites
-Python
+Matlab R2014
 
 ### Directories
-(...)
+
+- /code/algorithms
+
+- /code/aux_codes
+
+- /code/methods
 
 ## Running the Tests
-(...)
+
+evaluation_algorithms.m
 
 ## Authors
 
 Danilo Pena
-
-## License
-(...)
-
-## Acknowledgments
-(...)
 
 
